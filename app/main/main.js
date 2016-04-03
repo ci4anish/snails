@@ -37,7 +37,7 @@ angular.module('main', [
     .state('searchgame', {
         url: "/searchgame",
         templateUrl: "main/templates/searchgame.html",
-        controller: 'SerchGameCtrl'
+        controller: 'SearchGameCtrl'
       })
     .state('todo', {
         url: "/todo",

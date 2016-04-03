@@ -22,6 +22,7 @@ $ionicons-font-path: "../assets/fonts" !default;
 @import "../../bower_components/ionic/scss/ionic";
 
 @import "_animations.scss";
+@import "_fonts.scss";
 
 
 .pane, .view {
@@ -30,6 +31,7 @@ $ionicons-font-path: "../assets/fonts" !default;
 
 .bar .my-btn{
 	margin-right: 5px;
+	font-size: 16px;
 }
 
 .my-btn{
@@ -37,7 +39,7 @@ $ionicons-font-path: "../assets/fonts" !default;
 	border-color: #444!important;
     min-height: 33px;
     line-height: 33px;
-    font-size: 14px
+    font-size: 20px;
 }
 
 .pages{
@@ -99,6 +101,11 @@ $ionicons-font-path: "../assets/fonts" !default;
       display: none;
     }
   }
+}
+
+h1, h2, h3, h4, h5, h6, p, span, button{
+	// font-family: "Amatic-Regular"!important;
+	font-family: "Amatic-Bold"!important;
 }
     
 

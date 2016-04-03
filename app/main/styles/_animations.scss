@@ -1,10 +1,10 @@
-.content{
-  transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1s;
-}
+// .content{
+//   transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1s;
+// }
 
-.content.active{
-  color: #9A4848;
-}
+// .content.active{
+//   color: #9A4848;
+// }
 
 .view-animate-container {
   position:relative;
@@ -12,7 +12,7 @@
 }
 
 .view-animate.ng-enter, .view-animate.ng-leave {
-   transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1s;
+   transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.8s;
    display:block;
    width:100%;
    position:fixed;
@@ -37,20 +37,20 @@
   opacity: 0;
 }
 
-.view-opacity.ng-enter, .view-opacity.ng-leave {
-  transition: all 0.4s;
-  position: absolute;
-}
+// .view-opacity.ng-enter, .view-opacity.ng-leave {
+//   transition: all 0.4s;
+//   position: absolute;
+// }
 
-.view-opacity.ng-enter,
-.view-opacity.ng-leave.ng-leave-active {
-  opacity: 0;
-}
+// .view-opacity.ng-enter,
+// .view-opacity.ng-leave.ng-leave-active {
+//   opacity: 0;
+// }
 
-.view-opacity.ng-enter.ng-enter-active,
-.view-opacity.ng-leave{
-  opacity: 1;
-}
+// .view-opacity.ng-enter.ng-enter-active,
+// .view-opacity.ng-leave{
+//   opacity: 1;
+// }
 
 // @-webkit-keyframes pulsar {
 //   0%   { transform: scale(1); }
@@ -100,16 +100,16 @@
 //   left: 10px;
 // }
 
-.animate-show {
-  opacity: 1;
-}
+// .animate-show {
+//   opacity: 1;
+// }
 
-.animate-show.ng-hide-add, .animate-show.ng-hide-remove {
-  transition: all linear 0.3s;
-  position: absolute;
-}
+// .animate-show.ng-hide-add, .animate-show.ng-hide-remove {
+//   transition: all linear 0.3s;
+//   position: absolute;
+// }
 
-.animate-show.ng-hide {
-  opacity: 0;
-}
+// .animate-show.ng-hide {
+//   opacity: 0;
+// }
 
