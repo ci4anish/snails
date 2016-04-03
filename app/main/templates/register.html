@@ -18,13 +18,16 @@
 				<input ng-model="user.passwordConfirm" type="password" match="user.password" name="myConfirmField" required/>
 			</label>
 			<!-- <div ng-show="registerForm.myConfirmField.$error.match">Fields do not match!</div> -->
-	      	
+
 			<div class="btn-wrapper">
 				<button class="button my-btn" type="submit">
 					Register
 				</button>
+        <span class="devider">or</span>
+        <button class="button my-btn" ui-sref="login">
+          Log in
+        </button>
 			</div>
 		</div>
 	</form>
 </div>
-      

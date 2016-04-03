@@ -13,7 +13,8 @@
     "angular-validation-match": "^1.7.1",
     "firebase": "^2.4.2",
     "angularfire": "^1.2.0",
-    "angularjs-slider": "^2.11.0"
+    "angularjs-slider": "^2.11.0",
+    "Ionicons": "ionicons#^2.0.1"
   },
   "devDependencies": {
     "angular-mocks": "~1.5.0"

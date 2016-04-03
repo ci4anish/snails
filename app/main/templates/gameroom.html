@@ -1,21 +1,32 @@
 <div id="gameroom-page" class="padding-page">
 	<button class="button my-btn" ng-click="start()">Start</button>
 	  <div class="competition">
-	    <rzslider
-	              rz-slider-model="firstSnail.value"
-	              rz-slider-options="firstSnail.options"
-	              class="input-range"
-	            ></rzslider>
-	     <rzslider
-	              rz-slider-model="secondSnail.value"
-	              rz-slider-options="secondSnail.options"
-	              class="input-range"
-	            ></rzslider>
-	    <rzslider
-	              rz-slider-model="thirdSnail.value"
-	              rz-slider-options="thirdSnail.options"
-	              class="input-range"
-	            ></rzslider>
+      <div class="snail-wrapper">
+        <span class="snail-text" ng-show="firstSnailText">{{ gameUser.name || 'Lord of Snails'}}</span>
+        <rzslider
+          rz-slider-model="firstSnail.value"
+          rz-slider-options="firstSnail.options"
+          class="input-range"
+        ></rzslider>
+      </div>
+      <div class="snail-wrapper">
+        <span class="snail-text" ng-show="secondSnailText">{{ gameUser.name || 'Lord of Snails'}}</span>
+        <rzslider
+          rz-slider-model="secondSnail.value"
+          rz-slider-options="secondSnail.options"
+          class="input-range"
+        ></rzslider>
+      </div>
+      <div class="snail-wrapper">
+        <span class="snail-text" ng-show="thirdSnailText">{{ gameUser.name || 'Lord of Snails'}}</span>
+        <rzslider
+          rz-slider-model="thirdSnail.value"
+          rz-slider-options="thirdSnail.options"
+          class="input-range"
+        ></rzslider>
+      </div>
+
 	  </div>
 </div>
-      
+
+

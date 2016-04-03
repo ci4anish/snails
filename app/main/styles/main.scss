@@ -25,13 +25,48 @@ $ionicons-font-path: "../assets/fonts" !default;
 @import "_fonts.scss";
 
 
-.pane, .view {
-    top: 45px;
+h1, h2, h3, h4, h5, h6, p, span, button{
+  // font-family: "Amatic-Regular"!important;
+  font-family: "Amatic-Bold"!important;
+}
+
+
+p, li, a{
+  font-family: "Roboto-Reqular"!important;
+}
+
+.bar{
+  position: static!important;
 }
 
 .bar .my-btn{
 	margin-right: 5px;
 	font-size: 16px;
+}
+
+.nav-buttons{
+  width: 100%;
+
+  button:last-of-type{
+    margin-right: 0;
+    float: right;
+  }
+
+  span.user-name{
+    float: right;
+    font-size: 25px;
+    margin-right: 8px;
+    line-height: 34px;
+
+    i{
+      cursor: pointer;
+      font-size: 17px;
+      margin-left: 4px;
+      position: relative;
+      top: -2px;
+      margin-right: 5px;
+    }
+  }
 }
 
 .my-btn{
@@ -42,13 +77,44 @@ $ionicons-font-path: "../assets/fonts" !default;
     font-size: 20px;
 }
 
-.pages{
-	margin-top: 44px;
+.spinner-wrapper{
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-content: flex-start;
+  -ms-flex-line-pack: start;
+  align-content: flex-start;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 100vh;
+  position: fixed;
+  top: 22px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  //.spinner svg {
+  //  width: 28px;
+  //  height: 28px;
+  //  stroke: #444;
+  //  fill: #444;
+  //}
 }
 
- // .bar > .button + .button:last-child{
- // 	right: auto;
- // }
+.app-name{
+  font-size: 30px;
+  margin: 0 auto;
+}
 
 #register-page,
 #login-page{
@@ -76,10 +142,35 @@ $ionicons-font-path: "../assets/fonts" !default;
 
 #gameroom-page{
 	.competition{
-    margin-top: 45px;
-    .input-range{
-      margin-top: 40px;
+    margin-top: 40px;
+
+    .snail-wrapper{
+      margin-top: 20px;
+      position: relative;
+
+      .snail-text{
+        left: 65px;
+        top: -20px;
+        background: #DEDEDE;
+        display: inline-block;
+        padding: 7px 15px;
+        border-radius: 30px;
+        position: absolute;
+
+        &:before{
+          content: "";
+          width: 0;
+          height: 0;
+          border-style: solid;
+          border-width: 10px 10px 0 0;
+          border-color: #DEDEDE transparent transparent transparent;
+          position: absolute;
+          top: 29px;
+          left: 6px;
+        }
+      }
     }
+
   }
 
   rzslider .rz-bubble{
@@ -103,10 +194,6 @@ $ionicons-font-path: "../assets/fonts" !default;
   }
 }
 
-h1, h2, h3, h4, h5, h6, p, span, button{
-	// font-family: "Amatic-Regular"!important;
-	font-family: "Amatic-Bold"!important;
-}
-    
+
 
 

@@ -1,7 +1,8 @@
 'use strict';
 angular.module('main')
-.controller('GameRoomCtrl', function ($scope, $interval) {
-//Slider with selection bar
+.controller('GameRoomCtrl', function ($scope, $interval, $rootScope, $timeout) {
+  $rootScope.buttonView = true;
+    //Slider with selection bar
 
     var maxSliderValue = 500;
     var max = 20;
@@ -69,8 +70,17 @@ angular.module('main')
 
     };
 
+    $scope.firstSnailText = false;
+    $scope.secondSnailText = false;
+    $scope.thirdSnailText = false;
+
     var raceInterval;
     $scope.start = function(){
-    	raceInterval = $interval(function(){$scope.getRandomNumber()}, 500);
+      $timeout(function(){$scope.firstSnailText = true;}, 1000);
+      $timeout(function(){$scope.firstSnailText = false; $scope.secondSnailText = true;}, 2000);
+      $timeout(function(){$scope.secondSnailText = false; $scope.thirdSnailText = true;}, 3000);
+      $timeout(function(){
+        $scope.thirdSnailText = false; raceInterval = $interval(function(){$scope.getRandomNumber()
+      }, 500);}, 4000);
     };
 });

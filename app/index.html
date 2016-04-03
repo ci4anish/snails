@@ -15,6 +15,7 @@
     <!-- build:css styles/vendor.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/angularjs-slider/dist/rzslider.css" />
+    <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.css" />
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -24,15 +25,20 @@
     <!-- endinject -->
     <!-- endbuild -->
   </head>
-  <body ng-app="Snails">
+  <body ng-app="Snails" ng-cloak>
 
     <div class="bar bar-header bar-light">
-      <button class="button my-btn" ui-sref="login">Log In</button>
-      <button class="button my-btn" ui-sref="register">Register</button>
-      <button class="button my-btn" ui-sref="gameroom">Game room</button>
-      <button class="button my-btn" ui-sref="searchgame">Search game</button>
-      <button class="button my-btn" ui-sref="todo">To do</button>
-      <button class="button my-btn" ng-click="logOut()">Log out</button>
+      <h1 class="app-name" ng-hide="buttonView">SNAILS</h1>
+      <div class="nav-buttons" ng-show="buttonView">
+        <!--<button class="button my-btn" ui-sref="isauth">Is auth</button>-->
+        <!--<button class="button my-btn" ui-sref="login">Log In</button>-->
+        <!--<button class="button my-btn" ui-sref="register">Register</button>-->
+        <button class="button my-btn" ui-sref="searchgame">Search game</button>
+        <button class="button my-btn" ui-sref="gameroom">Game room</button>
+        <button class="button my-btn" ui-sref="todo">To do</button>
+        <button class="button my-btn" ng-click="logOut()">Log out</button>
+        <span class="user-name">{{ gameUser.name || 'Lord of Snails' }}<i class="icon ion-edit" ui-sref="profile"></i></span>
+      </div>
     </div>
 
      <div class="view-animate-container">
@@ -78,6 +84,7 @@
     <script src="main/services/services.js"></script>
     <script src="main/controllers/searchgameCtrl.js"></script>
     <script src="main/controllers/registerCtrl.js"></script>
+    <script src="main/controllers/profileCtrl.js"></script>
     <script src="main/controllers/loginCtrl.js"></script>
     <script src="main/controllers/gameroomCtrl.js"></script>
     <script src="main/constants/config-const.js"></script>
