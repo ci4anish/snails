@@ -1,0 +1,115 @@
+.content{
+  transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1s;
+}
+
+.content.active{
+  color: #9A4848;
+}
+
+.view-animate-container {
+  position:relative;
+  // height:calc(100% - 52px)!important;
+}
+
+.view-animate.ng-enter, .view-animate.ng-leave {
+   transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1s;
+   display:block;
+   width:100%;
+   position:fixed;
+   // top:52px;
+   top:0;
+   left:0;
+   right:0;
+   bottom:0;
+   height:calc(100% - 44px)!important;
+ }
+
+.view-animate.ng-enter {
+  left:100%;
+  opacity: 0;
+}
+.view-animate.ng-enter.ng-enter-active {
+  left:0;
+  opacity: 1;
+}
+.view-animate.ng-leave.ng-leave-active {
+  left:-100%;
+  opacity: 0;
+}
+
+.view-opacity.ng-enter, .view-opacity.ng-leave {
+  transition: all 0.4s;
+  position: absolute;
+}
+
+.view-opacity.ng-enter,
+.view-opacity.ng-leave.ng-leave-active {
+  opacity: 0;
+}
+
+.view-opacity.ng-enter.ng-enter-active,
+.view-opacity.ng-leave{
+  opacity: 1;
+}
+
+// @-webkit-keyframes pulsar {
+//   0%   { transform: scale(1); }
+//   50% { transform: scale(1.25);}
+//   100% { transform: scale(1);}
+// }
+
+// @-moz-keyframes pulsar {
+//   0%   { transform: scale(1); }
+//   50% { transform: scale(1.25);}
+//   100% { transform: scale(1);}
+// }
+
+// @-o-keyframes pulsar {
+//   0%   { transform: scale(1); }
+//   50% { transform: scale(1.25);}
+//   100% { transform: scale(1);}
+// }
+
+// @keyframes pulsar {
+//   0%   { transform: scale(1); }
+//   50% { transform: scale(1.25);}
+//   100% { transform: scale(1);}
+// }
+
+// .pulsar{
+//   width: 30px;
+//   height: 30px;
+//   position: absolute;
+//   top: 10px;
+//   left: 30px;
+//   border-radius: 50%;
+//   background-color: #D4D3D3;
+// }
+
+// .pulsar > div{
+//   width: 10px;
+//   height: 10px;
+//   border-radius: 50%;
+//   background-color: #928888;
+//   animation: pulsar 3s ease-in-out infinite;
+//   -webkit-animation: pulsar 3s ease-in-out infinite;
+//   -moz-animation: pulsar 3s ease-in-out infinite;
+//   -o-animation: pulsar 3s ease-in-out infinite;
+//   position: absolute;
+//   top: 10px;
+//   left: 10px;
+// }
+
+.animate-show {
+  opacity: 1;
+}
+
+.animate-show.ng-hide-add, .animate-show.ng-hide-remove {
+  transition: all linear 0.3s;
+  position: absolute;
+}
+
+.animate-show.ng-hide {
+  opacity: 0;
+}
+

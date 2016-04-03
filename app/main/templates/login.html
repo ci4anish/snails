@@ -1,0 +1,35 @@
+<div id="login-page">
+	<form name="loginForm" novalidate ng-submit="loginForm.$valid && logIn()">
+	 	<div class="list">
+			<label class="item item-input">
+				<span class="input-label">Email</span>
+				<input name="loginMail" type="email" ng-model="user.mail" required>
+			</label>
+			<!-- <div role="alert">
+		      <span class="error" ng-show="loginForm.loginMail.$error.required">
+		        Required!</span>
+		      <span class="error" ng-show="loginForm.loginMail.$error.email">
+		        Not valid email!</span>
+		    </div> -->
+			<label class="item item-input">
+				<span class="input-label">Password</span>
+				<input name="loginPassword" type="password" ng-model="user.password" required>
+			</label>
+			<!-- <div role="alert">
+		      <span class="error" ng-show="loginForm.loginPassword.$error.required">
+		        Type your password!</span>
+		    </div> -->
+			<div class="btn-wrapper">
+				<button type="submit" class="button my-btn">
+					Log in
+				</button>
+				<span class="devider">or</span>
+				<button class="button my-btn" ui-sref="register">
+					Register
+				</button>
+			</div>
+		</div>
+	</form>
+</div>
+
+     

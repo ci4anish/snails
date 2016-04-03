@@ -1,0 +1,105 @@
+/*
+To customize the look and feel of Ionic, you can override the variables
+in ionic's _variables.scss file.
+
+For example, you might change some of the default colors:
+*/
+
+$light:                           #fff !default;
+$stable:                          #f8f8f8 !default;
+$positive:                        #4a87ee !default;
+$calm:                            #43cee6 !default;
+$balanced:                        #66cc33 !default;
+$energized:                       #f0b840 !default;
+$assertive:                       #ef4e3a !default;
+$royal:                           #8a6de9 !default;
+$dark:                            #444 !default;
+
+// The path for our ionicons font files, relative to the built & temporary main.css
+$ionicons-font-path: "../assets/fonts" !default;
+
+// Include all of Ionic
+@import "../../bower_components/ionic/scss/ionic";
+
+@import "_animations.scss";
+
+
+.pane, .view {
+    top: 45px;
+}
+
+.bar .my-btn{
+	margin-right: 5px;
+}
+
+.my-btn{
+	border: 1px solid;
+	border-color: #444!important;
+    min-height: 33px;
+    line-height: 33px;
+    font-size: 14px
+}
+
+.pages{
+	margin-top: 44px;
+}
+
+ // .bar > .button + .button:last-child{
+ // 	right: auto;
+ // }
+
+#register-page,
+#login-page{
+	.btn-wrapper{
+		margin-top: 15px;
+		text-align: center;
+	}
+
+	.devider{
+		padding: 0px 5px;
+    	display: inline-block;
+    	margin-top: 7px;
+	}
+ }
+
+#todo-page{
+	.line-through{
+	    text-decoration: line-through;
+	 }
+}
+
+.padding-page{
+	padding: 20px;
+}
+
+#gameroom-page{
+	.competition{
+    margin-top: 45px;
+    .input-range{
+      margin-top: 40px;
+    }
+  }
+
+  rzslider .rz-bubble{
+    display: none;
+  }
+
+  rzslider .rz-pointer{
+    background-image: url(../assets/images/snail.png);
+    background-size: 100%;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: 0;
+    border-radius: 0;
+    width: 58px;
+    height: 35px;
+    top: -30px;
+
+    &:after{
+      display: none;
+    }
+  }
+}
+    
+
+
