@@ -8,63 +8,15 @@
  * Service in the angularTestGeneratorApp.
  */
 angular.module('main')
-  .factory('snailService', function ($q, $firebaseObject, $firebaseArray, $interval, $state, $timeout) {
+  .factory('snailService', function ($rootScope, $q, $firebaseObject, $firebaseArray, $interval, $state, $timeout) {
     var appRef = new Firebase("https://snail-game.firebaseio.com/");
-    // var snailsPositionsRef = new Firebase("https://snail-game.firebaseio.com/currentPosition");
-    var checkingInterval;
-    // function authHandler(error, authData) {
-    //   if (error) {
-    //     switch (error.code) {
-    //       case "INVALID_EMAIL":
-    //         console.log("The specified user account email is invalid.");
-    //         break;
-    //       case "INVALID_PASSWORD":
-    //         console.log("The specified user account password is incorrect.");
-    //         break;
-    //       case "INVALID_USER":
-    //         console.log("The specified user account does not exist.");
-    //         break;
-    //       default:
-    //         console.log("Error logging user in:", error);
-    //     }
-    //   } else {
-    //     console.log("Authenticated successfully with payload:", authData);
-    //     $timeout(function(){$state.go("gameroom");}, 1000);
-    //     //
-    //     // userId = authData.uid;
-    //     // appRef.child("users").child(authData.uid).update({
-    //     //   authenticated: true
-    //     // });
-    //   }
-    // }
-    // function authDataCallback(authData) {
-    //   if (authData) {
-    //     console.log("User " + authData.uid + " is logged in with " + authData.provider);
-    //     $timeout(function(){$state.go("gameroom");}, 1000);
-    //
-    //     return true;
-    //   } else {
-    //     console.log("Client unauthenticated.");
-    //     $timeout(function(){$state.go("login");}, 1000);
-    //
-    //     return false;
-    //   }
-    // }
 
-    function async(name) {
-      var deferred = $q.defer();
-
-      setTimeout(function() {
-        deferred.notify('About to greet ' + name + '.');
-
-        if (okToGreet(name)) {
-          deferred.resolve('Hello, ' + name + '!');
-        } else {
-          deferred.reject('Greeting ' + name + ' is not allowed.');
-        }
-      }, 1000);
-
-      return deferred.promise;
+    function size(obj) {
+      var size = 0, key;
+      for (key in obj) {
+        if (obj.hasOwnProperty(key)) size++;
+      }
+      return size;
     }
 
     return {
@@ -127,30 +79,50 @@ angular.module('main')
         },
         getUser: function(userId){
             var deferred = $q.defer();
-          
+
             appRef.child("users").child(userId).on("value", function(snapshot) {
               deferred.resolve(snapshot.val());
              // console.log(snapshot.val());
            }, function (errorObject) {
               deferred.reject("The read failed: " + errorObject.code);
            });
-          
+
           return deferred.promise;
         }
-        // canselChecking: function(){
-        //   console.log('Stop listening for changes');
-        //   appRef.offAuth(authDataCallback);
-        //   $interval.cancel(checkingInterval);
-        // }
       },
 
-      checkForPlayers: function(){
+      checkForPlayers: function(userId){
+
+        $rootScope.showSpinner = true;
+
+        // var deferred = $q.defer();
+
+        console.log("Start searching");
+
+        appRef.child("users").child(userId).update({
+          searchingGame: true
+        });
+
         // getting 3 users that are searching for game
         appRef.child("users").orderByChild("searchingGame").equalTo(true).limitToFirst(3).on("value", function(snapshot) {
-           console.log(snapshot.val());
+
+          // deferred.resolve(snapshot.val());
+           console.log(size(snapshot.val()));
+
          }, function (errorObject) {
-           console.log("The read failed: " + errorObject.code);
+          // deferred.reject("The read failed: " + errorObject.code);
         });
+
+        $timeout(function(){
+          appRef.child("users").child(userId).update({
+            searchingGame: false
+          });
+          console.log("Finish searching");
+
+          $rootScope.showSpinner = false;
+        }, 15000);
+
+        // return deferred.promise;
       }
 
       // getSnailsPositions: function(){

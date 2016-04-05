@@ -23,16 +23,18 @@ angular.module('main', [
   $stateProvider
     .state('isauth', {
       url: "/isauth",
-      template: '<div class="spinner-wrapper"><ion-spinner icon="spiral"></ion-spinner></div>',
       controller: function($rootScope, snailService, $state, $timeout){
         $rootScope.buttonView = false;
+        $rootScope.showSpinner = true;
 
         snailService.authentication.isAuth()
         .then(function(authData) {
+          $rootScope.gameUser.id = authData.uid;
 
           snailService.authentication.getUser(authData.uid).then(function(gameUser){
-            $rootScope.gameUser = gameUser;
-            // console.log($rootScope.gameUser);
+            $rootScope.gameUser.name = gameUser.name;
+            $rootScope.gameUser.searchingGame = gameUser.searchingGame;
+
           });
 
           $timeout(function(){$state.go("searchgame");}, 2000);

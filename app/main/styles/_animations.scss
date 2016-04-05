@@ -100,16 +100,17 @@
 //   left: 10px;
 // }
 
-// .animate-show {
-//   opacity: 1;
-// }
+ .spinner-wrapper {
+   opacity: 1;
+   transition: all linear 0.3s;
+ }
+ .spinner-wrapper.ng-hide {
+   opacity: 0;
+ }
 
 // .animate-show.ng-hide-add, .animate-show.ng-hide-remove {
 //   transition: all linear 0.3s;
 //   position: absolute;
 // }
 
-// .animate-show.ng-hide {
-//   opacity: 0;
-// }
 

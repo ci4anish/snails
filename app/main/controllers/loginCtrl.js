@@ -2,6 +2,7 @@
 angular.module('main')
 .controller('LoginCtrl', function ($rootScope, $scope, snailService, $timeout, $state) {
   $rootScope.buttonView = false;
+  $rootScope.showSpinner = false;
 
 	$scope.logIn = function(){
     	snailService.authentication.logIn($scope.user.mail, $scope.user.password).then(function(user) {
