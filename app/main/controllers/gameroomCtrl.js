@@ -1,6 +1,6 @@
 'use strict';
 angular.module('main')
-.controller('GameRoomCtrl', function ($scope, $interval, $rootScope, $timeout) {
+.controller('GameRoomCtrl', function ($scope, $interval, $rootScope, $timeout, snailService) {
   $rootScope.buttonView = true;
     //Slider with selection bar
 
@@ -13,13 +13,7 @@ angular.module('main')
         showSelectionBar: true,
         readOnly: true,
         getSelectionBarColor: function(value) {
-          if (value <= 160)
-            return 'red';
-          if (value <= 290)
-            return 'orange';
-          if (value <= 400)
-            return 'yellow';
-          return '#2AE02A';
+          if(value >= 0) return '#D2D477';
         }
     };
 
@@ -83,4 +77,8 @@ angular.module('main')
         $scope.thirdSnailText = false; raceInterval = $interval(function(){$scope.getRandomNumber()
       }, 500);}, 4000);
     };
+
+  // snailService.getGame().then(function(gameId){
+  //   console.log(gameId);
+  // })
 });

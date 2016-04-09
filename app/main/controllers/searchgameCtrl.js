@@ -10,4 +10,5 @@ angular.module('main')
 
     snailService.checkForPlayers($rootScope.gameUser.id);
   }
+
 });

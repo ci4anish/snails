@@ -19,6 +19,69 @@ angular.module('main')
       return size;
     }
 
+    var gameId = '', globalUId, timeout;
+    var functionTime = 15000;
+
+    // function onFoundCallback(snapshot) {
+    //   if(!snapshot.val()){
+    //     $timeout(function(){
+    //       appRef.child('gamerooms').child(gameId).child(globalUId).set({
+    //         snailValue: 0
+    //       });
+    //
+    //       console.log(gameId);
+    //       gameId = '';
+    //     }, 500);
+    //
+    //     $timeout(function(){
+    //       appRef.child("users").orderByChild("searchingGame").equalTo(true).limitToFirst(2).off("value", searchingUsersCallback);
+    //       console.log('Found players');
+    //       $timeout.cancel(timeout);
+    //       $rootScope.showSpinner = false;
+    //       $state.go('gameroom');
+    //     }, 2000);
+    //
+    //   }
+    // }
+
+    function searchingUsersCallback(snapshot) {
+      var counter = 0;
+
+      if(size(snapshot.val()) === 2){
+
+        for(var usersId in snapshot.val()){
+
+          appRef.child("users").child(usersId).update({
+            searchingGame: false
+          });
+          gameId += usersId;
+          counter++;
+        }
+      }
+
+      if(counter === 2){
+          appRef.child('gamerooms').child(gameId).child(globalUId).set({
+            snailValue: 0
+          });
+          console.log(gameId);
+          appRef.child("users").orderByChild("searchingGame").equalTo(true).limitToFirst(2).off("value", searchingUsersCallback);
+          console.log('Found players');
+          $timeout.cancel(timeout);
+          $rootScope.showSpinner = false;
+          $state.go('gameroom');
+      }
+
+    }
+
+    function snailsPosCallback(snapshot){
+      console.log(snapshot.val());
+    }
+
+    // function searchingUsersError(errorObject) {
+    //   console.log(errorObject);
+    // }
+
+
     return {
       authentication: {
         createUser: function(userMail, userPassword, userName){
@@ -93,9 +156,9 @@ angular.module('main')
 
       checkForPlayers: function(userId){
 
-        $rootScope.showSpinner = true;
+        globalUId = userId;
 
-        // var deferred = $q.defer();
+        $rootScope.showSpinner = true;
 
         console.log("Start searching");
 
@@ -103,33 +166,37 @@ angular.module('main')
           searchingGame: true
         });
 
-        // getting 3 users that are searching for game
-        appRef.child("users").orderByChild("searchingGame").equalTo(true).limitToFirst(3).on("value", function(snapshot) {
+          // appRef.child("users").child(userId).child("searchingGame").on("value", onFoundCallback);
 
-          // deferred.resolve(snapshot.val());
-           console.log(size(snapshot.val()));
+        // getting 3 users that are searching for game(2 for now to simplify testing)
+          appRef.child("users").orderByChild("searchingGame").equalTo(true).limitToFirst(2).on("value", searchingUsersCallback);
 
-         }, function (errorObject) {
-          // deferred.reject("The read failed: " + errorObject.code);
-        });
+        timeout = $timeout(function(){
+          // appRef.child("users").child(userId).child("searchingGame").off("value", onFoundCallback);
+          appRef.child("users").orderByChild("searchingGame").equalTo(true).limitToFirst(2).off("value", searchingUsersCallback);
 
-        $timeout(function(){
           appRef.child("users").child(userId).update({
             searchingGame: false
           });
-          console.log("Finish searching");
+          console.log("No players were found");
 
           $rootScope.showSpinner = false;
-        }, 15000);
+        }, functionTime);
 
-        // return deferred.promise;
-      }
+      },
 
-      // getSnailsPositions: function(){
-      //   snailsPositionsRef.on("value", function(snapshot, prevChildKey) {
-      //     console.log(snapshot.val())
-      //     return snapshot.val();
+      // getGame: function(){
+      //   var deferred = $q.defer();
+      //
+      //   appRef.child('gamerooms').child(gameId).child(globalUId).on('value', function(snapshot){
+      //     deferred.resolve(snapshot);
       //   });
+      //
+      //   // gameId = '';
+      //
+      //   return deferred.promise
       // }
+
+
     }
 });
