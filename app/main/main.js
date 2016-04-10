@@ -8,13 +8,17 @@ angular.module('main', [
   'rzModule'
   // TODO: load other modules selected during generation
 ])
-.run(function($rootScope, snailService, $state, $timeout){
+.run(function($rootScope, snailService, $state){
   $rootScope.gameUser = {};
 
   $rootScope.logOut = function () {
     snailService.authentication.logOut();
     $state.go('login');
   };
+
+  $rootScope.searchGame = function(){
+    snailService.game.checkForPlayers($rootScope.gameUser.id);
+  }
 })
 .config(function ($stateProvider, $urlRouterProvider) {
 
@@ -37,7 +41,7 @@ angular.module('main', [
 
           });
 
-          $timeout(function(){$state.go("searchgame");}, 2000);
+          $timeout(function(){$state.go("profile");}, 2000);
         }, function(error) {
           $timeout(function(){$state.go("login");}, 2000);
         });
@@ -57,11 +61,6 @@ angular.module('main', [
         url: "/register",
         templateUrl: "main/templates/register.html",
         controller: 'RegisterCtrl'
-      })
-    .state('searchgame', {
-        url: "/searchgame",
-        templateUrl: "main/templates/searchgame.html",
-        controller: 'SearchGameCtrl'
       })
     .state('profile', {
       url: "/profile",

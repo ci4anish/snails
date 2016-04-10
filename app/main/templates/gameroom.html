@@ -1,36 +1,20 @@
-<div id="gameroom-page" class="padding-page">
-	<button class="button my-btn" ng-click="start()">Start</button>
+<div id="gameroom-page" class="padding-page" ng-hide="showSpinner">
+	<button class="button my-btn" ng-click="move()" ng-disabled="introduction">Move</button>
   <img class="finish-flag" src="main/assets/images/finish_flag.png" alt="Finish flag img">
 
 	  <div class="competition">
-      <div class="snail-wrapper">
-        <span class="snail-text" ng-show="firstSnailText">{{ gameUser.name || 'Lord of Snails'}}</span>
+
+      <div class="snail-wrapper" ng-repeat="player in snails" ng-class="{transition: pageLoaded}">
+        <span class="snail-text" ng-show="player.showLabel">{{ player.name || 'Lord of Snails'}}</span>
+        <span class="snail-text" ng-show="sayLetsGo">{{ "Let`s go!" }}</span>
         <rzslider
-          rz-slider-model="firstSnail.value"
-          rz-slider-options="firstSnail.options"
-          class="input-range"
-        ></rzslider>
-      </div>
-      <div class="snail-wrapper">
-        <span class="snail-text" ng-show="secondSnailText">{{ gameUser.name || 'Lord of Snails'}}</span>
-        <rzslider
-          rz-slider-model="secondSnail.value"
-          rz-slider-options="secondSnail.options"
-          class="input-range"
-        ></rzslider>
-      </div>
-      <div class="snail-wrapper">
-        <span class="snail-text" ng-show="thirdSnailText">{{ gameUser.name || 'Lord of Snails'}}</span>
-        <rzslider
-          rz-slider-model="thirdSnail.value"
-          rz-slider-options="thirdSnail.options"
+          rz-slider-model="player.value"
+          rz-slider-options="player.options"
           class="input-range"
         ></rzslider>
       </div>
 
 	  </div>
-
-  <img class="finish-flag" src="main/assets/images/finish_flag.png" alt="Finish flag img">
 </div>
 
 

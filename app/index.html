@@ -33,11 +33,12 @@
         <!--<button class="button my-btn" ui-sref="isauth">Is auth</button>-->
         <!--<button class="button my-btn" ui-sref="login">Log In</button>-->
         <!--<button class="button my-btn" ui-sref="register">Register</button>-->
-        <button class="button my-btn" ui-sref="searchgame">Search game</button>
-        <button class="button my-btn" ui-sref="gameroom">Game room</button>
-        <button class="button my-btn" ui-sref="todo">To do</button>
+        <button class="button my-btn" ng-click="searchGame()">Search game</button>
+        <!--<button class="button my-btn" ui-sref="gameroom">Game room</button>-->
+        <!--<button class="button my-btn" ui-sref="todo">To do</button>-->
         <button class="button my-btn" ng-click="logOut()">Log out</button>
-        <span class="user-name">{{ gameUser.name || 'Lord of Snails' }}<i class="icon ion-edit" ui-sref="profile"></i></span>
+        <span class="user-name">{{ gameUser.name || 'Lord of Snails' }}</span>
+        <!--<i class="icon ion-edit" ui-sref="profile"></i>-->
       </div>
     </div>
 
@@ -84,7 +85,6 @@
     <!-- inject:js -->
     <script src="main/main.js"></script>
     <script src="main/services/services.js"></script>
-    <script src="main/controllers/searchgameCtrl.js"></script>
     <script src="main/controllers/registerCtrl.js"></script>
     <script src="main/controllers/profileCtrl.js"></script>
     <script src="main/controllers/loginCtrl.js"></script>

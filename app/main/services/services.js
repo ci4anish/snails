@@ -19,35 +19,16 @@ angular.module('main')
       return size;
     }
 
-    var gameId = '', globalUId, timeout;
+    var gameId = '', globalUId, timeout, gameObjects;
     var functionTime = 15000;
-
-    // function onFoundCallback(snapshot) {
-    //   if(!snapshot.val()){
-    //     $timeout(function(){
-    //       appRef.child('gamerooms').child(gameId).child(globalUId).set({
-    //         snailValue: 0
-    //       });
-    //
-    //       console.log(gameId);
-    //       gameId = '';
-    //     }, 500);
-    //
-    //     $timeout(function(){
-    //       appRef.child("users").orderByChild("searchingGame").equalTo(true).limitToFirst(2).off("value", searchingUsersCallback);
-    //       console.log('Found players');
-    //       $timeout.cancel(timeout);
-    //       $rootScope.showSpinner = false;
-    //       $state.go('gameroom');
-    //     }, 2000);
-    //
-    //   }
-    // }
+    var players = 3;
 
     function searchingUsersCallback(snapshot) {
       var counter = 0;
 
-      if(size(snapshot.val()) === 2){
+      if(size(snapshot.val()) === players){
+
+        gameObjects = snapshot.val();
 
         for(var usersId in snapshot.val()){
 
@@ -59,22 +40,19 @@ angular.module('main')
         }
       }
 
-      if(counter === 2){
+      if(counter === players){
           appRef.child('gamerooms').child(gameId).child(globalUId).set({
+            name: $rootScope.gameUser.name,
             snailValue: 0
           });
           console.log(gameId);
-          appRef.child("users").orderByChild("searchingGame").equalTo(true).limitToFirst(2).off("value", searchingUsersCallback);
+          appRef.child("users").orderByChild("searchingGame").equalTo(true).limitToFirst(players).off("value", searchingUsersCallback);
           console.log('Found players');
           $timeout.cancel(timeout);
           $rootScope.showSpinner = false;
           $state.go('gameroom');
       }
 
-    }
-
-    function snailsPosCallback(snapshot){
-      console.log(snapshot.val());
     }
 
     // function searchingUsersError(errorObject) {
@@ -106,6 +84,7 @@ angular.module('main')
 
           return deferred.promise;
         },
+
         logIn: function (userMail, userPassword) {
           var deferred = $q.defer();
 
@@ -122,9 +101,11 @@ angular.module('main')
 
           return deferred.promise;
         },
+
         logOut: function () {
             appRef.unauth();
         },
+
         isAuth: function(){
 
           var deferred = $q.defer();
@@ -140,6 +121,7 @@ angular.module('main')
 
           return deferred.promise;
         },
+
         getUser: function(userId){
             var deferred = $q.defer();
 
@@ -154,49 +136,66 @@ angular.module('main')
         }
       },
 
-      checkForPlayers: function(userId){
+      game: {
+        checkForPlayers: function(userId){
 
-        globalUId = userId;
+          globalUId = userId;
 
-        $rootScope.showSpinner = true;
+          $rootScope.showSpinner = true;
 
-        console.log("Start searching");
+          console.log("Start searching");
 
-        appRef.child("users").child(userId).update({
-          searchingGame: true
-        });
+          appRef.child("users").child(userId).update({
+            searchingGame: true
+          });
 
           // appRef.child("users").child(userId).child("searchingGame").on("value", onFoundCallback);
 
-        // getting 3 users that are searching for game(2 for now to simplify testing)
-          appRef.child("users").orderByChild("searchingGame").equalTo(true).limitToFirst(2).on("value", searchingUsersCallback);
+          // getting users that are searching for game - hardcoded "players" for now
+          appRef.child("users").orderByChild("searchingGame").equalTo(true).limitToFirst(players).on("value", searchingUsersCallback);
 
-        timeout = $timeout(function(){
-          // appRef.child("users").child(userId).child("searchingGame").off("value", onFoundCallback);
-          appRef.child("users").orderByChild("searchingGame").equalTo(true).limitToFirst(2).off("value", searchingUsersCallback);
+          timeout = $timeout(function(){
+            // appRef.child("users").child(userId).child("searchingGame").off("value", onFoundCallback);
+            appRef.child("users").orderByChild("searchingGame").equalTo(true).limitToFirst(players).off("value", searchingUsersCallback);
 
-          appRef.child("users").child(userId).update({
-            searchingGame: false
+            appRef.child("users").child(userId).update({
+              searchingGame: false
+            });
+            console.log("No players were found");
+
+            $rootScope.showSpinner = false;
+          }, functionTime);
+
+        },
+
+        getGame: function(){
+          return gameObjects;
+        },
+
+        move: function(value){
+          appRef.child('gamerooms').child(gameId).child(globalUId).update({
+            snailValue: value
           });
-          console.log("No players were found");
+        },
 
-          $rootScope.showSpinner = false;
-        }, functionTime);
+        getSnailsPos: function(){
 
-      },
+          var deferred = $q.defer();
 
-      // getGame: function(){
-      //   var deferred = $q.defer();
-      //
-      //   appRef.child('gamerooms').child(gameId).child(globalUId).on('value', function(snapshot){
-      //     deferred.resolve(snapshot);
-      //   });
-      //
-      //   // gameId = '';
-      //
-      //   return deferred.promise
-      // }
+          appRef.child('gamerooms').child(gameId).on("value", function(snapshot) {
+            deferred.resolve(snapshot.val());
+          }, function (errorObject) {
+            deferred.reject(errorObject);
+          });
 
+          return deferred.promise;
+        },
+
+        removeGame: function(){
+          appRef.child('gamerooms').child(gameId).remove();
+          gameId = '';
+        }
+      }
 
     }
 });

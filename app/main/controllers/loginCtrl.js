@@ -7,14 +7,15 @@ angular.module('main')
 	$scope.logIn = function(){
     	snailService.authentication.logIn($scope.user.mail, $scope.user.password).then(function(user) {
 
+        $rootScope.gameUser.id = user.uid;
         snailService.authentication.getUser(user.uid).then(function(gameUser){
-          $rootScope.gameUser = gameUser;
+
+          $rootScope.gameUser.name = gameUser.name;
+          $rootScope.gameUser.searchingGame = gameUser.searchingGame;
         });
 
-        $timeout(function(){$state.go("searchgame");}, 1000);
+        $timeout(function(){$state.go("profile");}, 1000);
 
-        // $state.go("searchgame");
-        // $rootScope.gameUser.userId = user.uid;
         $scope.user.mail = "";
         $scope.user.password = "";
 
