@@ -1,7 +1,7 @@
 'use strict';
 angular.module('main')
 .controller('GameRoomCtrl', function ($scope, $interval, $rootScope, $timeout, snailService, $ionicModal, $state) {
-  $rootScope.buttonView = true;
+  $rootScope.buttonView = false;
   $scope.pageLoaded = false;
   $timeout(function(){$scope.pageLoaded = true;}, 800);
   $scope.sayLetsGo = false;
